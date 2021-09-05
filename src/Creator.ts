@@ -67,3 +67,16 @@ export function providePersonalInformation(
     email,
   };
 }
+
+export function stepNumber(creator: Creator): number {
+  switch (creator.step) {
+    case "Pattern Selection":
+      return 0;
+    case "Color Selection":
+      return 1;
+    case "Personal Information":
+      return 2;
+    case "Summary":
+      return 3;
+  }
+}

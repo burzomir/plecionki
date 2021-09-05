@@ -63,6 +63,7 @@ function App() {
       <MobileStepper
         variant="dots"
         steps={4}
+        activeStep={Creator.stepNumber(creator)}
         backButton={<Button>Back</Button>}
         nextButton={<Button>Next</Button>}
       />
