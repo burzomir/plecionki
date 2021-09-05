@@ -33,6 +33,7 @@ export function ColorSelection({ creator, onSelect }: ColorSelectionProps) {
         throw new Error("Unknown pattern");
     }
   };
+  const [colors, setColors] = useState(["new"]);
   return (
     <>
       <Typography variant="h5">Select colors</Typography>
@@ -43,20 +44,49 @@ export function ColorSelection({ creator, onSelect }: ColorSelectionProps) {
           colors={[]}
         />
       </div>
-      <Color value="red" />
-      <Color value="green" />
-      <Color value="new" />
+      {colors.map((color, index) => (
+        <Color
+          key={index}
+          value={color}
+          onAdd={(c) => setColors([...colors.slice(0, -1), c, "new"])}
+          onRemove={() =>
+            setColors(
+              colors.reduce(
+                (cs, c, i) => (i === index ? cs : [...cs, c]),
+                [] as string[]
+              )
+            )
+          }
+          onChange={(color) =>
+            setColors(colors.map((c, i) => (i === index ? color : c)))
+          }
+        />
+      ))}
     </>
   );
 }
 
 type ColorProps = {
   value: string;
+  onChange: (color: string) => void;
+  onAdd: (color: string) => void;
+  onRemove: () => void;
 };
 
-function Color({ value }: ColorProps) {
+function Color({ value, onRemove, onAdd, onChange }: ColorProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
+  const select = (color: string) => {
+    setAnchorEl(null);
+    setTimeout(() => {
+      value === "new" ? onAdd(color) : onChange(color);
+    });
+  };
+  const remove = () => {
+    setAnchorEl(null);
+    setTimeout(() => {
+      onRemove();
+    });
+  };
   return (
     <>
       {value === "new" && (
@@ -89,14 +119,24 @@ function Color({ value }: ColorProps) {
           horizontal: "center",
         }}
       >
-        <IconButton style={{ color: "red", fontSize: "3rem" }}>
+        <IconButton
+          style={{ color: "red", fontSize: "3rem" }}
+          onClick={() => select("red")}
+        >
           <FiberManualRecordIcon style={{ fontSize: "3rem" }} />
         </IconButton>
-        <IconButton style={{ color: "green", fontSize: "3rem" }}>
+        <IconButton
+          style={{ color: "green", fontSize: "3rem" }}
+          onClick={() => select("green")}
+        >
           <FiberManualRecordIcon style={{ fontSize: "3rem" }} />
         </IconButton>
         {value !== "new" && (
-          <IconButton style={{ fontSize: "2.5rem" }} title="Remove color">
+          <IconButton
+            style={{ fontSize: "2.5rem" }}
+            title="Remove color"
+            onClick={remove}
+          >
             <RemoveCircleIcon style={{ fontSize: "2.5rem" }} />
           </IconButton>
         )}
