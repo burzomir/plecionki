@@ -29,7 +29,7 @@ function App() {
       case "Pattern Selection":
         return <PatternSelection creator={creator} onSelect={setNextCreator} />;
       case "Color Selection":
-        return <ColorSelection creator={creator} onSelect={setCreator} />;
+        return <ColorSelection creator={creator} onSelect={setNextCreator} />;
       default:
         return <Paper>Unknown step</Paper>;
     }

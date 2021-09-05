@@ -1,5 +1,5 @@
 import { IconButton, makeStyles, Popover, Typography } from "@material-ui/core";
-import { ColorSelectionStep, Creator } from "../Creator";
+import { ColorSelectionStep, Creator, selectColors } from "../Creator";
 import { Patterns, PatternsMap } from "../patterns/Patterns";
 import { Pattern } from "../patterns/Pattern";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
@@ -9,7 +9,7 @@ import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 
 type ColorSelectionProps = {
   creator: ColorSelectionStep;
-  onSelect: (creator: Creator) => void;
+  onSelect: (creator: Creator | null) => void;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +34,15 @@ export function ColorSelection({ creator, onSelect }: ColorSelectionProps) {
     }
   };
   const [colors, setColors] = useState(["new"]);
+  const updateColors = (newColors: string[]) => {
+    setColors(newColors);
+    if (newColors.length === 1) {
+      onSelect(null);
+    } else {
+      const newCreator = selectColors(newColors.slice(0, -1), creator);
+      onSelect(newCreator);
+    }
+  };
   return (
     <>
       <Typography variant="h5">Select colors</Typography>
@@ -48,9 +57,9 @@ export function ColorSelection({ creator, onSelect }: ColorSelectionProps) {
         <Color
           key={index}
           value={color}
-          onAdd={(c) => setColors([...colors.slice(0, -1), c, "new"])}
+          onAdd={(c) => updateColors([...colors.slice(0, -1), c, "new"])}
           onRemove={() =>
-            setColors(
+            updateColors(
               colors.reduce(
                 (cs, c, i) => (i === index ? cs : [...cs, c]),
                 [] as string[]
@@ -58,7 +67,7 @@ export function ColorSelection({ creator, onSelect }: ColorSelectionProps) {
             )
           }
           onChange={(color) =>
-            setColors(colors.map((c, i) => (i === index ? color : c)))
+            updateColors(colors.map((c, i) => (i === index ? color : c)))
           }
         />
       ))}
