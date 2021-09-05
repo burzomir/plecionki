@@ -41,7 +41,7 @@ export function ColorSelection({ creator, onSelect }: ColorSelectionProps) {
         <Pattern
           className={styles.pattern}
           PatternSource={getPatternSource()}
-          colors={[]}
+          colors={colors.slice(0, -1)}
         />
       </div>
       {colors.map((color, index) => (
