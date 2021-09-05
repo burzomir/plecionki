@@ -10,6 +10,7 @@ import { useState } from "react";
 import * as Creator from "./Creator";
 import { Pattern } from "./patterns/Pattern";
 import { ReactComponent as Pattern1 } from "./patterns/pattern-1.svg";
+import { ColorSelection } from "./steps/ColorSelection";
 import { PatternSelection } from "./steps/PatternSelection";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,26 +34,9 @@ function App() {
   const renderStep = () => {
     switch (creator.step) {
       case "Pattern Selection":
-        return (
-          <Paper className={styles.section}>
-            <PatternSelection creator={creator} onSelect={setCreator} />
-          </Paper>
-        );
+        return <PatternSelection creator={creator} onSelect={setCreator} />;
       case "Color Selection":
-        return (
-          <Paper className={styles.section}>
-            <Typography variant="h5">Select colors</Typography>
-            <div className={styles.patternList}>
-              <Pattern
-                className={styles.pattern}
-                PatternSource={Pattern1}
-                colors={["red", "green", "blue"]}
-              />
-            </div>
-            <Button onClick={() => setCreator(Creator.start())}>Back</Button>
-          </Paper>
-        );
-
+        return <ColorSelection creator={creator} onSelect={setCreator} />;
       default:
         return <Paper>Unknown step</Paper>;
     }

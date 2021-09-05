@@ -1,8 +1,7 @@
 import { Button, makeStyles, Typography } from "@material-ui/core";
 import { Creator, PatternSelectionStep, selectPattern } from "../Creator";
+import { Patterns, PatternsMap } from "../patterns/Patterns";
 import { Pattern } from "../patterns/Pattern";
-import { ReactComponent as Pattern1 } from "../patterns/pattern-1.svg";
-import { ReactComponent as Pattern2 } from "../patterns/pattern-2.svg";
 
 type PatternSelectionProps = {
   creator: PatternSelectionStep;
@@ -24,17 +23,21 @@ export function PatternSelection({ creator, onSelect }: PatternSelectionProps) {
     <>
       <Typography variant="h5">Select a pattern</Typography>
       <div className={styles.patternList}>
-        <Button onClick={() => onSelect(selectPattern("pattern-1", creator))}>
+        <Button
+          onClick={() => onSelect(selectPattern(Patterns.Pattern1, creator))}
+        >
           <Pattern
             className={styles.pattern}
-            PatternSource={Pattern1}
+            PatternSource={PatternsMap[Patterns.Pattern1]}
             colors={[]}
           />
         </Button>
-        <Button onClick={() => onSelect(selectPattern("pattern-1", creator))}>
+        <Button
+          onClick={() => onSelect(selectPattern(Patterns.Pattern2, creator))}
+        >
           <Pattern
             className={styles.pattern}
-            PatternSource={Pattern2}
+            PatternSource={PatternsMap[Patterns.Pattern2]}
             colors={[]}
           />
         </Button>
