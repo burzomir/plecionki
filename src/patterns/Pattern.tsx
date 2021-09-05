@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 export type PatternProps = {
   PatternSource: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   colors: string[];
+  className?: string;
 };
 
-export function Pattern({ PatternSource, colors }: PatternProps) {
+export function Pattern({ PatternSource, colors, className }: PatternProps) {
   const [svg, setSvg] = useState<SVGSVGElement | null>(null);
   useEffect(() => {
     svg?.querySelectorAll("path").forEach((path, index) => {
@@ -17,5 +18,5 @@ export function Pattern({ PatternSource, colors }: PatternProps) {
       }
     });
   }, [svg, colors]);
-  return <PatternSource ref={setSvg} />;
+  return <PatternSource ref={setSvg} className={className} />;
 }
