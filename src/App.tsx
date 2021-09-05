@@ -1,4 +1,10 @@
-import { Button, Container, Paper, Typography } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  MobileStepper,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
 import * as Creator from "./Creator";
@@ -31,25 +37,29 @@ function App() {
           <Paper className={styles.section}>
             <Typography variant="h5">Select a pattern</Typography>
             <div className={styles.patternList}>
-              <Pattern
-                className={styles.pattern}
-                PatternSource={Pattern1}
-                colors={[]}
-              />
-              <Pattern
-                className={styles.pattern}
-                PatternSource={Pattern2}
-                colors={[]}
-              />
+              <Button
+                onClick={() =>
+                  setCreator(Creator.selectPattern("pattern-1", creator))
+                }
+              >
+                <Pattern
+                  className={styles.pattern}
+                  PatternSource={Pattern1}
+                  colors={[]}
+                />
+              </Button>
+              <Button
+                onClick={() =>
+                  setCreator(Creator.selectPattern("pattern-1", creator))
+                }
+              >
+                <Pattern
+                  className={styles.pattern}
+                  PatternSource={Pattern2}
+                  colors={[]}
+                />
+              </Button>
             </div>
-            <Button
-              color="primary"
-              onClick={() =>
-                setCreator(Creator.selectPattern("pattern-1", creator))
-              }
-            >
-              Next
-            </Button>
           </Paper>
         );
       case "Color Selection":
@@ -71,7 +81,17 @@ function App() {
         return <Paper>Unknown step</Paper>;
     }
   };
-  return <Container className={styles.root}>{renderStep()}</Container>;
+  return (
+    <Container className={styles.root}>
+      {renderStep()}
+      <MobileStepper
+        variant="dots"
+        steps={4}
+        backButton={<Button>Back</Button>}
+        nextButton={<Button>Next</Button>}
+      />
+    </Container>
+  );
 }
 
 export default App;
