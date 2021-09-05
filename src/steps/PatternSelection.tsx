@@ -1,4 +1,10 @@
-import { Button, makeStyles, Typography } from "@material-ui/core";
+import {
+  FormControlLabel,
+  makeStyles,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@material-ui/core";
 import { Creator, PatternSelectionStep, selectPattern } from "../Creator";
 import { Patterns, PatternsMap } from "../patterns/Patterns";
 import { Pattern } from "../patterns/Pattern";
@@ -22,26 +28,35 @@ export function PatternSelection({ creator, onSelect }: PatternSelectionProps) {
   return (
     <>
       <Typography variant="h5">Select a pattern</Typography>
-      <div className={styles.patternList}>
-        <Button
-          onClick={() => onSelect(selectPattern(Patterns.Pattern1, creator))}
-        >
-          <Pattern
-            className={styles.pattern}
-            PatternSource={PatternsMap[Patterns.Pattern1]}
-            colors={[]}
-          />
-        </Button>
-        <Button
-          onClick={() => onSelect(selectPattern(Patterns.Pattern2, creator))}
-        >
-          <Pattern
-            className={styles.pattern}
-            PatternSource={PatternsMap[Patterns.Pattern2]}
-            colors={[]}
-          />
-        </Button>
-      </div>
+      <RadioGroup
+        row
+        onChange={(e) => onSelect(selectPattern(e.target.value, creator))}
+      >
+        <FormControlLabel
+          value={Patterns.Pattern1}
+          control={<Radio color="primary" />}
+          labelPlacement="top"
+          label={
+            <Pattern
+              className={styles.pattern}
+              PatternSource={PatternsMap[Patterns.Pattern1]}
+              colors={[]}
+            />
+          }
+        />
+        <FormControlLabel
+          value={Patterns.Pattern2}
+          control={<Radio color="primary" />}
+          labelPlacement="top"
+          label={
+            <Pattern
+              className={styles.pattern}
+              PatternSource={PatternsMap[Patterns.Pattern2]}
+              colors={[]}
+            />
+          }
+        />
+      </RadioGroup>
     </>
   );
 }
