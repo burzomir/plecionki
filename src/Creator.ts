@@ -80,3 +80,23 @@ export function stepNumber(creator: Creator): number {
       return 3;
   }
 }
+
+export function back(creator: Creator): Creator {
+  switch (creator.step) {
+    case "Pattern Selection":
+      return start();
+    case "Color Selection":
+      return start();
+    case "Personal Information":
+      return {
+        step: "Color Selection",
+        pattern: creator.pattern,
+      };
+    case "Summary":
+      return {
+        step: "Personal Information",
+        pattern: creator.pattern,
+        colors: creator.colors,
+      };
+  }
+}

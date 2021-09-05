@@ -64,7 +64,14 @@ function App() {
         variant="dots"
         steps={4}
         activeStep={Creator.stepNumber(creator)}
-        backButton={<Button>Back</Button>}
+        backButton={
+          <Button
+            onClick={() => setCreator(Creator.back(creator))}
+            disabled={Creator.stepNumber(creator) === 0}
+          >
+            Back
+          </Button>
+        }
         nextButton={<Button>Next</Button>}
       />
     </Container>
