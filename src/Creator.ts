@@ -1,19 +1,19 @@
-type PatternSelectionStep = {
+export type PatternSelectionStep = {
   step: "Pattern Selection";
 };
 
-type ColorSelectionStep = {
+export type ColorSelectionStep = {
   step: "Color Selection";
   pattern: string;
 };
 
-type PersonalInformationStep = {
+export type PersonalInformationStep = {
   step: "Personal Information";
   pattern: string;
   colors: string[];
 };
 
-type SummaryStep = {
+export type SummaryStep = {
   step: "Summary";
   pattern: string;
   colors: string[];

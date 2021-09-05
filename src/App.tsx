@@ -10,7 +10,7 @@ import { useState } from "react";
 import * as Creator from "./Creator";
 import { Pattern } from "./patterns/Pattern";
 import { ReactComponent as Pattern1 } from "./patterns/pattern-1.svg";
-import { ReactComponent as Pattern2 } from "./patterns/pattern-2.svg";
+import { PatternSelection } from "./steps/PatternSelection";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,31 +35,7 @@ function App() {
       case "Pattern Selection":
         return (
           <Paper className={styles.section}>
-            <Typography variant="h5">Select a pattern</Typography>
-            <div className={styles.patternList}>
-              <Button
-                onClick={() =>
-                  setCreator(Creator.selectPattern("pattern-1", creator))
-                }
-              >
-                <Pattern
-                  className={styles.pattern}
-                  PatternSource={Pattern1}
-                  colors={[]}
-                />
-              </Button>
-              <Button
-                onClick={() =>
-                  setCreator(Creator.selectPattern("pattern-1", creator))
-                }
-              >
-                <Pattern
-                  className={styles.pattern}
-                  PatternSource={Pattern2}
-                  colors={[]}
-                />
-              </Button>
-            </div>
+            <PatternSelection creator={creator} onSelect={setCreator} />
           </Paper>
         );
       case "Color Selection":
