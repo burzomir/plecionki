@@ -1,11 +1,12 @@
-import { IconButton, makeStyles, Popover, Typography } from "@material-ui/core";
-import { ColorSelectionStep, Creator, selectColors } from "../Creator";
-import { Patterns, PatternsMap } from "../patterns/Patterns";
-import { Pattern } from "../patterns/Pattern";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import { IconButton, makeStyles, Popover } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { useState } from "react";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+import { useState } from "react";
+import { ColorSelectionStep, Creator, selectColors } from "../Creator";
+import { Pattern } from "../patterns/Pattern";
+import { Patterns, PatternsMap } from "../patterns/Patterns";
+import { Step } from "./Step";
 
 type ColorSelectionProps = {
   creator: ColorSelectionStep;
@@ -44,8 +45,7 @@ export function ColorSelection({ creator, onSelect }: ColorSelectionProps) {
     }
   };
   return (
-    <>
-      <Typography variant="h5">Select colors</Typography>
+    <Step title="Select colors">
       <div className={styles.patternList}>
         <Pattern
           className={styles.pattern}
@@ -53,25 +53,27 @@ export function ColorSelection({ creator, onSelect }: ColorSelectionProps) {
           colors={colors.slice(0, -1)}
         />
       </div>
-      {colors.map((color, index) => (
-        <Color
-          key={index}
-          value={color}
-          onAdd={(c) => updateColors([...colors.slice(0, -1), c, "new"])}
-          onRemove={() =>
-            updateColors(
-              colors.reduce(
-                (cs, c, i) => (i === index ? cs : [...cs, c]),
-                [] as string[]
+      <div>
+        {colors.map((color, index) => (
+          <Color
+            key={index}
+            value={color}
+            onAdd={(c) => updateColors([...colors.slice(0, -1), c, "new"])}
+            onRemove={() =>
+              updateColors(
+                colors.reduce(
+                  (cs, c, i) => (i === index ? cs : [...cs, c]),
+                  [] as string[]
+                )
               )
-            )
-          }
-          onChange={(color) =>
-            updateColors(colors.map((c, i) => (i === index ? color : c)))
-          }
-        />
-      ))}
-    </>
+            }
+            onChange={(color) =>
+              updateColors(colors.map((c, i) => (i === index ? color : c)))
+            }
+          />
+        ))}
+      </div>
+    </Step>
   );
 }
 

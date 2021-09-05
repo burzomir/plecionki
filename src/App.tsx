@@ -6,18 +6,7 @@ import { ColorSelection } from "./steps/ColorSelection";
 import { PatternSelection } from "./steps/PatternSelection";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(1),
-  },
-  section: {
-    padding: theme.spacing(1),
-  },
-  patternList: {
-    textAlign: "center",
-  },
-  pattern: {
-    margin: theme.spacing(1),
-  },
+  root: {},
 }));
 
 function App() {

@@ -3,11 +3,11 @@ import {
   makeStyles,
   Radio,
   RadioGroup,
-  Typography,
 } from "@material-ui/core";
 import { Creator, PatternSelectionStep, selectPattern } from "../Creator";
 import { Patterns, PatternsMap } from "../patterns/Patterns";
 import { Pattern } from "../patterns/Pattern";
+import { Step } from "./Step";
 
 type PatternSelectionProps = {
   creator: PatternSelectionStep;
@@ -26,8 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export function PatternSelection({ creator, onSelect }: PatternSelectionProps) {
   const styles = useStyles();
   return (
-    <>
-      <Typography variant="h5">Select a pattern</Typography>
+    <Step title="Select pattern">
       <RadioGroup
         row
         onChange={(e) => onSelect(selectPattern(e.target.value, creator))}
@@ -57,6 +56,6 @@ export function PatternSelection({ creator, onSelect }: PatternSelectionProps) {
           }
         />
       </RadioGroup>
-    </>
+    </Step>
   );
 }
