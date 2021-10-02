@@ -130,18 +130,14 @@ function Color({ value, onRemove, onAdd, onChange }: ColorProps) {
           horizontal: "center",
         }}
       >
-        <IconButton
-          style={{ color: "red", fontSize: "3rem" }}
-          onClick={() => select("red")}
-        >
-          <FiberManualRecordIcon style={{ fontSize: "3rem" }} />
-        </IconButton>
-        <IconButton
-          style={{ color: "green", fontSize: "3rem" }}
-          onClick={() => select("green")}
-        >
-          <FiberManualRecordIcon style={{ fontSize: "3rem" }} />
-        </IconButton>
+        {palette.map((color) => (
+          <IconButton
+            style={{ color, fontSize: "3rem" }}
+            onClick={() => select(color)}
+          >
+            <FiberManualRecordIcon style={{ fontSize: "3rem" }} />
+          </IconButton>
+        ))}
         {value !== "new" && (
           <IconButton
             style={{ fontSize: "2.5rem" }}
@@ -155,3 +151,5 @@ function Color({ value, onRemove, onAdd, onChange }: ColorProps) {
     </>
   );
 }
+
+const palette = ["#E56399", "#D3A588", "#ECE2D0", "#7FD1B9", "#7A6563", "#EC4E20", "#FF9505", "#016FB9"];
