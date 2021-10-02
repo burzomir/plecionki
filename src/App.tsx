@@ -1,16 +1,11 @@
 import { Button, Container, MobileStepper, Paper } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
 import * as Creator from "./Creator";
 import { ColorSelection } from "./steps/ColorSelection";
 import { PatternSelection } from "./steps/PatternSelection";
-
-const useStyles = makeStyles((theme) => ({
-  root: {},
-}));
+import { Summary } from "./steps/Summary";
 
 function App() {
-  const styles = useStyles();
   const [creator, setCreator] = useState(Creator.start());
   const [nextCreator, setNextCreator] = useState<Creator.Creator | null>(null);
   const renderStep = () => {
@@ -19,16 +14,18 @@ function App() {
         return <PatternSelection creator={creator} onSelect={setNextCreator} />;
       case "Color Selection":
         return <ColorSelection creator={creator} onSelect={setNextCreator} />;
+      case "Summary":
+        return <Summary creator={creator} />;
       default:
         return <Paper>Unknown step</Paper>;
     }
   };
   return (
-    <Container className={styles.root}>
+    <Container>
       {renderStep()}
       <MobileStepper
         variant="dots"
-        steps={4}
+        steps={3}
         activeStep={Creator.stepNumber(creator)}
         backButton={
           <Button
