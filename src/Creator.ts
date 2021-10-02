@@ -7,25 +7,13 @@ export type ColorSelectionStep = {
   pattern: string;
 };
 
-export type PersonalInformationStep = {
-  step: "Personal Information";
-  pattern: string;
-  colors: string[];
-};
-
 export type SummaryStep = {
   step: "Summary";
   pattern: string;
   colors: string[];
-  name: string;
-  email: string;
 };
 
-export type Creator =
-  | PatternSelectionStep
-  | ColorSelectionStep
-  | PersonalInformationStep
-  | SummaryStep;
+export type Creator = PatternSelectionStep | ColorSelectionStep | SummaryStep;
 
 export function start(): Creator {
   return {
@@ -48,23 +36,9 @@ export function selectColors(
   { pattern }: ColorSelectionStep
 ): Creator {
   return {
-    step: "Personal Information",
-    pattern,
-    colors,
-  };
-}
-
-export function providePersonalInformation(
-  name: string,
-  email: string,
-  { pattern, colors }: PersonalInformationStep
-): Creator {
-  return {
     step: "Summary",
     pattern,
     colors,
-    name,
-    email,
   };
 }
 
@@ -74,10 +48,8 @@ export function stepNumber(creator: Creator): number {
       return 0;
     case "Color Selection":
       return 1;
-    case "Personal Information":
-      return 2;
     case "Summary":
-      return 3;
+      return 2;
   }
 }
 
@@ -87,16 +59,10 @@ export function back(creator: Creator): Creator {
       return start();
     case "Color Selection":
       return start();
-    case "Personal Information":
+    case "Summary":
       return {
         step: "Color Selection",
         pattern: creator.pattern,
-      };
-    case "Summary":
-      return {
-        step: "Personal Information",
-        pattern: creator.pattern,
-        colors: creator.colors,
       };
   }
 }
