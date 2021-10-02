@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/plecionki/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/plecionki/static/js/main.133e4c31.chunk.js",
+    "main.js.map": "/plecionki/static/js/main.133e4c31.chunk.js.map",
+    "runtime-main.js": "/plecionki/static/js/runtime-main.44cb85c1.js",
+    "runtime-main.js.map": "/plecionki/static/js/runtime-main.44cb85c1.js.map",
+    "static/js/2.77e877c0.chunk.js": "/plecionki/static/js/2.77e877c0.chunk.js",
+    "static/js/2.77e877c0.chunk.js.map": "/plecionki/static/js/2.77e877c0.chunk.js.map",
+    "static/js/3.ed8e68fa.chunk.js": "/plecionki/static/js/3.ed8e68fa.chunk.js",
+    "static/js/3.ed8e68fa.chunk.js.map": "/plecionki/static/js/3.ed8e68fa.chunk.js.map",
+    "index.html": "/plecionki/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/plecionki/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.77e877c0.chunk.js.LICENSE.txt": "/plecionki/static/js/2.77e877c0.chunk.js.LICENSE.txt",
+    "static/media/pattern-1.1246bc6c.svg": "/plecionki/static/media/pattern-1.1246bc6c.svg",
+    "static/media/pattern-2.d26a34a7.svg": "/plecionki/static/media/pattern-2.d26a34a7.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.44cb85c1.js",
+    "static/js/2.77e877c0.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.133e4c31.chunk.js"
+  ]
+}
