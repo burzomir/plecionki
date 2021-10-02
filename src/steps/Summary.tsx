@@ -1,4 +1,4 @@
-import { makeStyles, Popover } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import { SummaryStep } from "../Creator";
 import { Pattern } from "../patterns/Pattern";
 import { Patterns, PatternsMap } from "../patterns/Patterns";
@@ -40,6 +40,7 @@ export function Summary({ creator }: SummaryProps) {
         />
       </div>
       <p>Your project is ready for order!</p>
+      <Button variant='contained' color='primary'>Order now</Button>
     </Step>
   );
 }
